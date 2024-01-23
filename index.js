@@ -20,8 +20,9 @@ client.on("messageCreate", (message) => {
   const command = message.content.split(" ")[0];
   const content = message.content.split(" ");
   switch (command) {
-    case "@CL4P-TP": {
+    case "!presentation": {
       message.channel.send("ciao sono un robot steward CL4P-TP ma tu puoi chiamarmi claptrap");
+      break;
     }
     case "!modList": {
       message.channel.send("ecco tutte le mod:");
