@@ -16,24 +16,29 @@ const modList = ["mod 1", "mod 2", "mod 3"];
 
 client.login(token);
 
-client.on("ready", () => {
-  console.log("Bot online");
-});
 client.on("messageCreate", (message) => {
   const command = message.content.split(" ")[0];
-  console.log(command, message.content);
+  const content = message.content.split(" ");
   switch (command) {
+    case "@CL4P-TP": {
+      message.channel.send("ciao sono un robot steward CL4P-TP ma tu puoi chiamarmi claptrap");
+    }
     case "!modList": {
-      console.log("ecco tutte le mod:");
-      modList.forEach((mod, i) => console.log(`${i + 1}| ${modList[i]}`));
+      message.channel.send("ecco tutte le mod:");
+      let stringModList = "";
+      modList.forEach((mod, i) => (stringModList += `${i + 1}| ${modList[i]} \n`));
+      message.channel.send(stringModList);
       break;
     }
     case "!addMod": {
-      console.log("e va bene aggiorno la lavagna");
+      message.channel.send("e va bene aggiorno la lavagna");
+      modList.push(content.slice(1).toString().replace(",", " "));
       break;
     }
     case "!remMod": {
-      console.log("va bene ma quanto mi fate lavorare però");
+      message.channel.send("va bene ma quanto mi fate lavorare però");
+      const index = content.slice(1) - 1;
+      modList.splice(index, 1);
       break;
     }
   }
