@@ -23,14 +23,23 @@ client.on("messageCreate", (message) => {
   try {
     switch (command) {
       case "!presentation": {
-        message.channel.send("ciao sono un robot steward CL4P-TP ma tu puoi chiamarmi claptrap");
+        message.channel.send(
+          "ciao sono un robot steward CL4P-TP ma i miei amici mi chiamano claptrap o meglio lo farebbero se fossero ancora vivi o esistessero in tanto per incominciare"
+        );
         break;
       }
       case "!modList": {
         if (oldMods.length > 0) {
           message.channel.send("ecco tutte le mod:");
           let stringModList = "";
-          oldMods.forEach((mod, i) => (stringModList += `${i + 1}| ${oldMods[i]} \n`));
+          oldMods.forEach((mod, i) => {
+            stringModList += `${i + 1}| ${oldMods[i]} \n`;
+            if (stringModList.length >= 1500) {
+              messageToSend = stringModList;
+              message.channel.send(messageToSend);
+              stringModList = "";
+            }
+          });
           if (newMods.length > 0) {
             stringModList += "----------mod nuove------------------\n";
             newMods.forEach((mod, i) => (stringModList += `${i + 1}| ${newMods[i]} \n`));
@@ -68,6 +77,15 @@ client.on("messageCreate", (message) => {
         break;
       }
       case "!clearMod": {
+        if (newMods.length > 0) {
+          message.channel.send("ok rimuovo le mod nuove, peccato");
+          newMods = [];
+        } else {
+          message.channel.send("e cosa dovrei rimuovere? non c'e nessuna mod nuova. MI STAI PRENDENDO IN GIRO?");
+        }
+        break;
+      }
+      case "!clearAllOldMod": {
         if (newMods.length > 0) {
           message.channel.send("ok rimuovo le mod nuove, peccato");
           newMods = [];
