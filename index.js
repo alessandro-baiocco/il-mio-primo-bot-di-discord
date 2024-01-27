@@ -12,7 +12,7 @@ const client = new Client({
   partials: [Partials.Channel],
 });
 
-const oldMods = [];
+let oldMods = [];
 let newMods = [];
 
 client.login(token);
@@ -74,6 +74,12 @@ client.on("messageCreate", (message) => {
         } else {
           message.channel.send("e cosa dovrei rimuovere? non c'e nessuna mod nuova. MI STAI PRENDENDO IN GIRO?");
         }
+        break;
+      }
+      case "!clearAllOldMod": {
+        message.channel.send("cosa? devo buttare la lavagna ? e va bene prendi questo lavagna ");
+        oldMods = [];
+        newMods = [];
         break;
       }
     }
