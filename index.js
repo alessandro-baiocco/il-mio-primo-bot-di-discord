@@ -26,6 +26,9 @@ client.on("messageCreate", (message) => {
         message.channel.send(
           "ciao sono un robot steward CL4P-TP ma i miei amici mi chiamano claptrap o meglio lo farebbero se fossero ancora vivi o esistessero in tanto per incominciare"
         );
+        message.channel.send(
+          "comandi per claptrap 1 !addMod {mod} aggiunge una mod 2 !remMod {number} rimuove una mod 3 !clearMod rimuove le mod nuove 4 !clearAllOldMod rimuove TUTTE le mod"
+        );
         break;
       }
       case "!modList": {
@@ -43,6 +46,11 @@ client.on("messageCreate", (message) => {
           if (newMods.length > 0) {
             stringModList += "----------mod nuove------------------\n";
             newMods.forEach((mod, i) => (stringModList += `${i + 1}| ${newMods[i]} \n`));
+            if (stringModList.length >= 1500) {
+              messageToSend = stringModList;
+              message.channel.send(messageToSend);
+              stringModList = "";
+            }
           } else {
             stringModList += "----------nessuna mod nuova------------------\n";
           }
